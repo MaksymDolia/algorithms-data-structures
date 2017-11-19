@@ -22,19 +22,19 @@ class FibonacciTest {
   }
 
   @TestFactory
-  Stream<DynamicTest> findFibonacciNumbers() {
+  Stream<DynamicTest> findRecursivelyFibonacciNumbers() {
     return IntStream.range(0, numbers.length)
         .mapToObj(i -> dynamicTest("Find Fibonacci number: " + i, () -> {
-          int result = fibonacci.find(numbers[i]);
+          int result = fibonacci.findRecursively(numbers[i]);
           assertEquals(fibonacciNumbers[i], result);
         }));
   }
 
   @TestFactory
-  Stream<DynamicTest> findFibonacciNumbersWithMemoization() {
+  Stream<DynamicTest> findRecursivelyFibonacciNumbersWithMemoization() {
     return IntStream.range(0, numbers.length)
         .mapToObj(i -> dynamicTest("Find Fibonacci number: " + i, () -> {
-          int result = fibonacci.findWithMemoization(numbers[i]);
+          int result = fibonacci.findRecursivelyWithMemoization(numbers[i]);
           assertEquals(fibonacciNumbers[i], result);
         }));
   }

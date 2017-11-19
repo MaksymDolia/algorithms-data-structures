@@ -13,30 +13,37 @@ public class Fibonacci {
    * @param n the consecutive index
    * @return the n-th Fibonacci number
    */
-  public int find(int n) {
+  public int findRecursively(int n) {
     if (n <= 0) {
       return 0;
     } else if (n == 1) {
       return 1;
     }
 
-    return find(n - 1) + find(n - 2);
+    return findRecursively(n - 1) + findRecursively(n - 2);
   }
 
-  public int findWithMemoization(int n) {
+  /**
+   * Recursive solution with memoization for Fibonacci numbers
+   *
+   * @param n the consecutive index
+   * @return the n-th Fibonacci number
+   */
+  public int findRecursivelyWithMemoization(int n) {
     int[] cache = new int[n];
     Arrays.fill(cache, -1);
-    return findWithMemoization(n, cache);
+    return findRecursivelyWithMemoization(n, cache);
   }
 
-  private int findWithMemoization(int n, int[] cache) {
+  private int findRecursivelyWithMemoization(int n, int[] cache) {
     if (n <= 0) {
       return 0;
     } else if (n == 1) {
       return 1;
     }
 
-    cache[n - 1] = findWithMemoization(n - 1, cache) + findWithMemoization(n - 2, cache);
+    cache[n - 1] =
+        findRecursivelyWithMemoization(n - 1, cache) + findRecursivelyWithMemoization(n - 2, cache);
 
     return cache[n - 1];
   }
