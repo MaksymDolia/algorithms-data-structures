@@ -22,6 +22,15 @@ class FibonacciTest {
   }
 
   @TestFactory
+  Stream<DynamicTest> findTabulatedFibonacciNumbers() {
+    return IntStream.range(0, numbers.length)
+        .mapToObj(i -> dynamicTest("Find Fibonacci number: " + i, () -> {
+          int result = fibonacci.findTabulated(numbers[i]);
+          assertEquals(fibonacciNumbers[i], result);
+        }));
+  }
+
+  @TestFactory
   Stream<DynamicTest> findRecursivelyFibonacciNumbers() {
     return IntStream.range(0, numbers.length)
         .mapToObj(i -> dynamicTest("Find Fibonacci number: " + i, () -> {
