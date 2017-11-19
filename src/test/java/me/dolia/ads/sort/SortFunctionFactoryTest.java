@@ -37,13 +37,26 @@ class SortFunctionFactoryTest {
   }
 
   @TestFactory
-  Stream<DynamicTest> insertionSort() {
+  Stream<DynamicTest> testInsertionSort() {
     int testsQuantity = UNORDERED_NUMBERS.length;
     Sort insertionSort = sortFactory.insertionSort();
     return IntStream.range(0, testsQuantity)
         .mapToObj(i -> dynamicTest("Insertion sort: " + i, () -> {
               int[] unordered = UNORDERED_NUMBERS[i].clone();
               insertionSort.accept(unordered);
+              assertArrayEquals(ORDERED_NUMBERS[i], unordered);
+            })
+        );
+  }
+
+  @TestFactory
+  Stream<DynamicTest> testMergeSort() {
+    int testsQuantity = UNORDERED_NUMBERS.length;
+    Sort mergeSort = sortFactory.mergeSort();
+    return IntStream.range(0, testsQuantity)
+        .mapToObj(i -> dynamicTest("Merge sort: " + i, () -> {
+              int[] unordered = UNORDERED_NUMBERS[i].clone();
+              mergeSort.accept(unordered);
               assertArrayEquals(ORDERED_NUMBERS[i], unordered);
             })
         );
