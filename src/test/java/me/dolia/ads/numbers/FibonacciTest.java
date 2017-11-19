@@ -11,8 +11,8 @@ import org.junit.jupiter.api.TestFactory;
 
 class FibonacciTest {
 
-  private int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-  private int[] fibonacciNumbers = {1, 1, 2, 3, 5, 8, 13, 21, 34, 55};
+  private int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
+  private int[] fibonacciNumbers = {1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987};
 
   private Fibonacci fibonacci;
 
@@ -26,6 +26,15 @@ class FibonacciTest {
     return IntStream.range(0, numbers.length)
         .mapToObj(i -> dynamicTest("Find Fibonacci number: " + i, () -> {
           int result = fibonacci.find(numbers[i]);
+          assertEquals(fibonacciNumbers[i], result);
+        }));
+  }
+
+  @TestFactory
+  Stream<DynamicTest> findFibonacciNumbersWithMemoization() {
+    return IntStream.range(0, numbers.length)
+        .mapToObj(i -> dynamicTest("Find Fibonacci number: " + i, () -> {
+          int result = fibonacci.findWithMemoization(numbers[i]);
           assertEquals(fibonacciNumbers[i], result);
         }));
   }
