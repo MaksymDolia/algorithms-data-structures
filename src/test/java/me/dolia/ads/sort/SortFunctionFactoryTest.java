@@ -37,6 +37,19 @@ class SortFunctionFactoryTest {
   }
 
   @TestFactory
+  Stream<DynamicTest> testBubbleSort() {
+    int testsQuantity = UNORDERED_NUMBERS.length;
+    Sort bubbleSort = sortFactory.bubbleSort();
+    return IntStream.range(0, testsQuantity)
+        .mapToObj(i -> dynamicTest("Bubble sort: " + i, () -> {
+              int[] unordered = UNORDERED_NUMBERS[i].clone();
+              bubbleSort.accept(unordered);
+              assertArrayEquals(ORDERED_NUMBERS[i], unordered);
+            })
+        );
+  }
+
+  @TestFactory
   Stream<DynamicTest> testInsertionSort() {
     int testsQuantity = UNORDERED_NUMBERS.length;
     Sort insertionSort = sortFactory.insertionSort();

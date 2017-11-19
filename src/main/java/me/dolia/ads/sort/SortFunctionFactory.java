@@ -3,6 +3,30 @@ package me.dolia.ads.sort;
 public class SortFunctionFactory {
 
   /**
+   * Implementation of Bubble sort.
+   *
+   * @return the function which performs the Bubble sort
+   * @see <a href="https://en.wikipedia.org/wiki/Bubble_sort">Bubble sort</a>
+   */
+  public Sort bubbleSort() {
+    return numbers -> {
+      for (int i = numbers.length; i > 0; i--) {
+        for (int j = 1; j < i; j++) {
+          if (numbers[j] < numbers[j - 1]) {
+            swap(numbers, j, j - 1);
+          }
+        }
+      }
+    };
+  }
+
+  private void swap(int[] arr, int i, int j) {
+    int tmp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = tmp;
+  }
+
+  /**
    * Implementation of Insertion sort.
    *
    * @return the function which performs the Insertion sort
