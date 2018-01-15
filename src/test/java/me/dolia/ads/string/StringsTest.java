@@ -1,5 +1,8 @@
 package me.dolia.ads.string;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -57,6 +60,35 @@ class StringsTest {
   @Test
   void shouldThrowExceptionOnCheckForBalancedParenthesesIfExpressionIsNull() {
     Executable executable = () -> Strings.isBalancedParentheses(null);
+
+    assertThrows(NullPointerException.class, executable);
+  }
+
+  @Test
+  void shouldReverseStringOfEvenLength() {
+    String str = "test";
+    String expected = "tset";
+
+    String result = Strings.reverse(str);
+
+    assertThat(result, notNullValue());
+    assertThat(result, equalTo(expected));
+  }
+
+  @Test
+  void shouldReverseStringOfOddLength() {
+    String str = "final";
+    String expected = "lanif";
+
+    String result = Strings.reverse(str);
+
+    assertThat(result, notNullValue());
+    assertThat(result, equalTo(expected));
+  }
+
+  @Test
+  void shouldThrowExceptionIfStringIsNull() {
+    Executable executable = () -> Strings.reverse(null);
 
     assertThrows(NullPointerException.class, executable);
   }

@@ -53,4 +53,21 @@ public class Strings {
     return (open == '(' && closed == ')') || (open == '{' && closed == '}') || (open == '['
         && closed == ']');
   }
+
+  public static String reverse(String str) {
+    char[] chars = str.toCharArray();
+
+    int n = chars.length;
+    for (int i = 0; i < n >> 1; i++) {
+      swap(chars, i, n - i - 1);
+    }
+
+    return new String(chars);
+  }
+
+  private static void swap(char[] chars, int first, int second) {
+    char tmp = chars[first];
+    chars[first] = chars[second];
+    chars[second] = tmp;
+  }
 }
